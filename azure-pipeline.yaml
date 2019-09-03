@@ -1,12 +1,8 @@
 trigger:
-
 - master
 
 pool:
   vmImage: 'Ubuntu-16.04'
-
-variables:
-  imageName: 'alcha/ansel'
 
 steps:
 - task: Docker@2

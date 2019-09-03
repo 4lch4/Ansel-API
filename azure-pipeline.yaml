@@ -12,3 +12,5 @@ steps:
     repository: 'alcha/ansel'
     command: 'buildAndPush'
     Dockerfile: 'Dockerfile'
+    tags: |
+      latest

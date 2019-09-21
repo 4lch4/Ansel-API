@@ -1,3 +1,4 @@
 node\_modules
 package-lock.json
 pnpm-lock.json
+*.log

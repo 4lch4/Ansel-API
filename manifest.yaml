@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: ansel
-        image: alcha/ansel:latest
+        image: 4lch4/ansel:latest
         ports:
         - containerPort: 4242
         env:

@@ -16,7 +16,7 @@ const getImageWithIndex = (name, index) => {
     listDirectoryFiles(name).then(files => {
       if (!index) index = chance.integer({ min: 0, max: files.length })
 
-      for (let x = 0; x < files.length; x++) {
+      for (var x = 0; x < files.length; x++) {
         const file = files[x]
         const key = file.Key
 
@@ -31,7 +31,7 @@ const getImageWithIndex = (name, index) => {
         }
       }
 
-      resolve(undefined)
+      if (x === files.length) resolve(undefined)
     }).catch(err => reject(err))
   })
 }

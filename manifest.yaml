@@ -61,7 +61,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: nyc100.alcha.org
+  - host: 4lch4.com
     http:
       paths:
       - path: /ansel

@@ -1,34 +1,25 @@
 const restify = require('restify')
-const plugins = restify.plugins
-
-const config = require('./config')
-
-const server = restify.createServer({
-  name: config.name,
-  version: config.version
-})
-
-server.use(plugins.jsonBodyParser({ mapParams: true }))
-server.use(plugins.acceptParser(server.acceptable))
-server.use(plugins.queryParser({ mapParams: true }))
-server.use(plugins.fullResponse())
-
-const path = require('path')
-const fs = require('fs')
-
 const morgan = require('morgan')
 
-// log only 4xx and 5xx responses to console
-server.use(morgan('dev', {
-  skip: function (req, res) { return res.statusCode < 400 }
-}))
+const {
+  name: APP_NAME,
+  version: APP_VERSION,
+  port: PORT
+} = require('./config')
 
-// log all requests to access.log
-server.use(morgan('combined', {
-  stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-}))
+const server = restify.createServer({
+  name: APP_NAME,
+  version: APP_VERSION
+})
 
-server.listen(config.port, () => {
+server.use(morgan('combined'))
+
+server.use(restify.plugins.jsonBodyParser({ mapParams: true }))
+server.use(restify.plugins.acceptParser(server.acceptable))
+server.use(restify.plugins.queryParser({ mapParams: true }))
+server.use(restify.plugins.fullResponse())
+
+server.listen(PORT, () => {
   require('./src/routes')(server)
-  console.log(`${config.name} is serving on port ${config.port}...`)
+  console.log(`${APP_NAME}-v${APP_VERSION} is now serving on port ${PORT}...`)
 })

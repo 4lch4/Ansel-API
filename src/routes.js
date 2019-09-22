@@ -8,7 +8,7 @@ module.exports = server => {
     return next()
   })
 
-  server.get('/ansel/reaction', async (req, res, next) => {
+  server.get('/ansel/reaction', (req, res, next) => {
     console.log('Request received at /ansel/reaction endpoint.')
     if (req.is('application/json') || req.is('application/octet-stream')) {
       // Use a ternary operator to determine if the data was provided as a URL
@@ -22,15 +22,14 @@ module.exports = server => {
         return next()
       }
 
-      try {
-        const image = await getImageWithIndex(data.name, data.index)
+      getImageWithIndex(data.name, data.index).then(image => {
         res.send(200, image.Body)
         return next()
-      } catch (err) {
+      }).catch(err => {
         console.error(err)
         res.send(500, err)
         return next(new Errors.InternalServerError(err))
-      }
+      })
     } else {
       console.log(req)
       return next(new Errors.InvalidContentError("Only 'application/json', 'application/octet-stream', or 'application/xml' requests accepted."))

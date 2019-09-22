@@ -11,27 +11,36 @@ const S3 = new AWS.S3({ endpoint: new AWS.Endpoint('nyc3.digitaloceanspaces.com'
  * @param {String} name The name of the reaction you wish to find an image/gif for.
  * @param {number} [index] The number of the specific reaction image/gif you wish to retrieve.
  */
-const getImageWithIndex = async (name, index) => {
-  try {
-    const files = await listDirectoryFiles(name)
-    if (!index) index = chance.integer({ min: 0, max: files.length })
+const getImageWithIndex = (name, index) => {
+  return new Promise((resolve, reject) => {
+    listDirectoryFiles(name).then(files => {
+      if (!index) index = chance.integer({ min: 0, max: files.length })
 
-    for (let x = 0; x < files.length; x++) {
-      const file = files[x]
-      const key = file.Key
+      for (let x = 0; x < files.length; x++) {
+        const file = files[x]
+        const key = file.Key
 
-      if (key.substring(key.indexOf('/') + 1).toLowerCase().startsWith(`${name}-${index}`)) {
-        const obj = await S3.getObject({
-          Bucket: 'ansel',
-          Key: key
-        }).promise()
-
-        return obj
+        if (key.substring(key.indexOf('/') + 1).toLowerCase().startsWith(`${name}-${index}`)) {
+          console.log(`File found... x = ${x};`)
+          console.log(file)
+          S3.getObject({
+            Bucket: 'ansel',
+            Key: key
+          }, (err, obj) => {
+            console.log('Object retrieved from api...')
+            if (err) {
+              console.log('Error received...')
+              console.log(err)
+              reject(err)
+            } else {
+              console.log('Resolving object')
+              console.log(resolve(obj))
+            }
+          })
+        }
       }
-    }
-
-    return undefined
-  } catch (err) { return err }
+    })
+  })
 }
 
 const listDirectoryFiles = directoryName => {

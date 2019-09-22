@@ -2,6 +2,11 @@ const Errors = require('restify-errors')
 const { getImageWithIndex } = require('./utils')
 
 module.exports = server => {
+  server.get('/', (req, res, next) => {
+    res.send(200, 'You have found the beginning of the ansel endpoint. Good luck!')
+    return next()
+  })
+
   server.get('/ansel/reaction', async (req, res, next) => {
     if (req.is('application/json') || req.is('application/octet-stream')) {
       // Use a ternary operator to determine if the data was provided as a URL

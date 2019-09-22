@@ -20,8 +20,8 @@ server.use(restify.plugins.queryParser({ mapParams: true }))
 server.use(restify.plugins.fullResponse())
 
 server.listen(PORT, () => {
-  console.log(process.env.AWS_ACCESS_KEY_ID)
-  console.log(process.env.AWS_SECRET_ACCESS_KEY)
+  console.log(`AWS_ACCESS_KEY_ID = ${process.env.AWS_ACCESS_KEY_ID}`)
+  console.log(`AWS_SECRET_ACCESS_KEY = ${process.env.AWS_SECRET_ACCESS_KEY}`)
   require('./src/routes')(server)
   console.log(`${APP_NAME}-v${APP_VERSION} is now serving on port ${PORT}...`)
 })

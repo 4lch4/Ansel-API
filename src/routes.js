@@ -16,13 +16,19 @@ module.exports = server => {
       // set it equal to req.body.
       const data = req.query.name ? req.query : req.body
 
+      console.log('Request is of correct type.')
+      console.log('Data...')
+      console.log(data)
+
       // Verify there was data provided via a URL query or the request body.
       if (!data) {
+        console.log('Data was not provided.')
         res.send(new Errors.BadRequestError('No data provided.'))
         return next()
       }
 
       getImageWithIndex(data.name, data.index).then(image => {
+        console.log(`${data.name} retrieved with index ${data.index}`)
         res.send(200, image.Body)
         return next()
       }).catch(err => {

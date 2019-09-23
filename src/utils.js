@@ -17,6 +17,7 @@ const S3 = new AWS.S3({ endpoint: endpoint })
 const getImageWithIndex = (name, index) => {
   return new Promise((resolve, reject) => {
     listDirectoryFiles(name).then(files => {
+      console.log(`Files have been retrieved... ${files.length}`)
       if (!index) index = chance.integer({ min: 0, max: files.length })
 
       for (let x = 0; x < files.length; x++) {
@@ -48,6 +49,7 @@ const getImageWithIndex = (name, index) => {
 
 const listDirectoryFiles = directoryName => {
   return new Promise((resolve, reject) => {
+    console.log(`Attempting to list files in ${directoryName}...`)
     S3.listObjectsV2({ Bucket: 'ansel', Prefix: `${directoryName}/` }, (err, data) => {
       if (err) reject(err)
       else resolve(data.Contents)

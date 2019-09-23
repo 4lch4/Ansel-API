@@ -2,7 +2,10 @@ const Chance = require('chance')
 const chance = new Chance()
 
 const AWS = require('aws-sdk')
-const S3 = new AWS.S3({ endpoint: new AWS.Endpoint('nyc3.digitaloceanspaces.com') })
+const endpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com')
+console.log('endpoint...')
+console.log(endpoint)
+const S3 = new AWS.S3({ endpoint: endpoint })
 
 /**
  * Retrieves an image from the Ansel DO Spaces with the provided name and index,

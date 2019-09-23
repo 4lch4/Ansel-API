@@ -25,9 +25,15 @@ spec:
         - containerPort: 4242
         env:
         - name: AWS_ACCESS_KEY_ID
-          value: #{SECRET_AWS_ACCESS_KEY_ID}#
+          valueFrom:
+            secretKeyRef:
+              name: do-secrets
+              key: AWS_ACCESS_KEY_ID
         - name: AWS_SECRET_ACCESS_KEY
-          value: #{SECRET_AWS_SECRET_ACCESS_KEY}#
+          valueFrom:
+            secretKeyRef:
+              name: do-secrets
+              key: AWS_SECRET_ACCESS_KEY
         livenessProbe:
           httpGet:
             path: /ansel/healthz

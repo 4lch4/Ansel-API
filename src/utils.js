@@ -50,10 +50,14 @@ const getImageWithIndex = (name, index) => {
 const listDirectoryFiles = directoryName => {
   return new Promise((resolve, reject) => {
     console.log(`Attempting to list files in ${directoryName}...`)
-    S3.listObjectsV2({ Bucket: 'ansel', Prefix: `${directoryName}/` }, (err, data) => {
+    S3.listObjects({ Bucket: 'ansel', Prefix: `${directoryName}/` }, (err, data) => {
       if (err) reject(err)
       else resolve(data.Contents)
     })
+    // S3.listObjectsV2({ Bucket: 'ansel', Prefix: `${directoryName}/` }, (err, data) => {
+    //   if (err) reject(err)
+    //   else resolve(data.Contents)
+    // })
   })
 }
 

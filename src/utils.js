@@ -26,9 +26,13 @@ const getImageWithIndex = (name, index) => {
             Bucket: 'ansel',
             Key: key
           }, (err, obj) => {
-            console.log('Object retrieved from api...')
             if (err) reject(err)
-            else resolve(obj)
+            else {
+              resolve({
+                obj: obj,
+                url: `https://nyc3.digitaloceanspaces.com/ansel/${key}`
+              })
+            }
           })
         }
       }

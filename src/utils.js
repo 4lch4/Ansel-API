@@ -15,6 +15,7 @@ const getImageWithIndex = (name, index) => {
   return new Promise((resolve, reject) => {
     listDirectoryFiles(name).then(files => {
       if (!index) index = chance.integer({ min: 0, max: files.length })
+      else if (index > files.length) resolve(undefined)
 
       for (let x = 0; x < files.length; x++) {
         const file = files[x]

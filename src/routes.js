@@ -22,6 +22,7 @@ module.exports = server => {
       }
 
       getImageWithIndex(data.name, data.index).then(image => {
+        console.log(image)
         if (image) {
           if (returnUrl) {
             res.send(200, image.url)

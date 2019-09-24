@@ -13,6 +13,7 @@ module.exports = server => {
       // query. If so, set data equal to the content of req.query. Otherwise,
       // set it equal to req.body.
       const data = req.query.name ? req.query : req.body
+      const returnUrl = req.query.return_url ? req.query.return_url : false
 
       // Verify there was data provided via a URL query or the request body.
       if (!data) {
@@ -21,6 +22,7 @@ module.exports = server => {
       }
 
       getImageWithIndex(data.name, data.index).then(image => {
+        console.log(image)
         if (image) res.send(200, image.Body)
         else res.send(200, 'No image was found with the given index 😢')
         return next()

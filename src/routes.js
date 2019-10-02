@@ -2,12 +2,12 @@ const Errors = require('restify-errors')
 const { getImageWithIndex } = require('./utils')
 
 module.exports = server => {
-  server.get('/ansel', (req, res, next) => {
+  server.get('/', (req, res, next) => {
     res.send(200, 'You have found the beginning of the ansel endpoint. Good luck!')
     return next()
   })
 
-  server.get('/ansel/reaction', (req, res, next) => {
+  server.get('/reaction', (req, res, next) => {
     if (req.is('application/json') || req.is('application/octet-stream')) {
       // Use a ternary operator to determine if the data was provided as a URL
       // query. If so, set data equal to the content of req.query. Otherwise,
@@ -40,7 +40,7 @@ module.exports = server => {
     }
   })
 
-  server.get('/ansel/healthz', (req, res, next) => {
+  server.get('/healthz', (req, res, next) => {
     res.send(200, 'OK')
     next()
   })

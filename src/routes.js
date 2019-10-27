@@ -21,13 +21,10 @@ module.exports = server => {
       }
 
       getImageWithIndex(data.name, data.index).then(image => {
-        const returnUrl = data.return_url ? data.return_url : false
+        const returnBuffer = data.return_buffer ? data.return_buffer : true
         if (image) {
-          if (returnUrl) {
-            res.send(200, image.url)
-          } else {
-            res.send(200, image.obj.Body)
-          }
+          if (returnBuffer) res.send(200, image.obj.Body)
+          else res.send(200, image.url)
         } else res.send(200, 'No image was found with the given index 😢')
 
         return next()

@@ -13,7 +13,12 @@ const S3 = new AWS.S3({ endpoint: new AWS.Endpoint('nyc3.digitaloceanspaces.com'
  */
 const getImageWithIndex = (name, index) => {
   return new Promise((resolve, reject) => {
+    console.log(`getImageWithInex(${name}, ${index})...`)
     listDirectoryFiles(name).then(files => {
+      console.log(`files.length = ${files.length}`)
+      console.log(`files[0] = ...`)
+      console.log(files[0])
+      
       if (!index) index = chance.integer({ min: 0, max: files.length })
       else if (index > files.length) resolve(undefined)
 

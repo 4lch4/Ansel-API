@@ -39,8 +39,8 @@ const getImageWithIndex = (name, index) => {
               })
             }
           })
-        } else if (key === `${name}/`) {
-          console.log(`found key/; x = ${x}`)
+        } else if (compA.length === 0) {
+          console.log(`compA = ${compA}; key = ${key}; x = ${x}`)
           x--
         }
       }

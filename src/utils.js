@@ -39,7 +39,10 @@ const getImageWithIndex = (name, index) => {
               })
             }
           })
-        } else if (key === `${name}/`) x--
+        } else if (key === `${name}/`) {
+          console.log(`found key/; x = ${x}`)
+          x--
+        }
       }
 
       if (!found) {

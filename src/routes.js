@@ -21,7 +21,7 @@ module.exports = server => {
       }
 
       getImageWithIndex(data.name, data.index).then(image => {
-        const returnBuffer = data.return_buffer ? data.return_buffer : true
+        const returnBuffer = data.return_buffer ? data.return_buffer : false
         if (image) {
           if (returnBuffer) res.send(200, image.obj.Body)
           else res.send(200, image.url)

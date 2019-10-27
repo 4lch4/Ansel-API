@@ -19,8 +19,9 @@ const getImageWithIndex = (name, index) => {
       if (!index) index = chance.integer({ min: 0, max: files.length - 1 })
       else if (index > files.length) resolve(undefined)
 
-      for (let x = 1; x < files.length; x++) {
+      for (let x = 0; x < files.length; x++) {
         const file = files[x]
+        if (file) {
         const key = file.Key
         const compA = key.substring(key.indexOf('/') + 1).toLowerCase()
         const compB = `${name}-${index}`

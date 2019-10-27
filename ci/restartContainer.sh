@@ -8,4 +8,4 @@ docker rm ansel
 docker pull 4lch4/ansel:latest
 
 # Start up container.
-docker run -d -p 4242:4242 4lch4/ansel:latest --name=ansel
+docker run -d -p 4242:4242 --name=ansel 4lch4/ansel:latest

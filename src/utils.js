@@ -16,10 +16,10 @@ const getImageWithIndex = (name, index) => {
 
   return new Promise((resolve, reject) => {
     listDirectoryFiles(name).then(files => {
-      if (!index) index = chance.integer({ min: 0, max: files.length })
+      if (!index) index = chance.integer({ min: 0, max: files.length - 1 })
       else if (index > files.length) resolve(undefined)
 
-      for (let x = 1; x <= files.length; x++) {
+      for (let x = 1; x < files.length; x++) {
         const file = files[x]
         const key = file.Key
         const compA = key.substring(key.indexOf('/') + 1).toLowerCase()

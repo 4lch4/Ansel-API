@@ -23,6 +23,4 @@ $ReqBody = @{
 
 $Json = $ReqBody | ConvertTo-Json -Depth 10 -Compress
 
-Write-Host $Json
-
 Invoke-RestMethod -Uri $WHURL -Method Post -ContentType 'application/json' -Body $Json

@@ -13,20 +13,23 @@ const S3 = new AWS.S3({ endpoint: new AWS.Endpoint('nyc3.digitaloceanspaces.com'
  */
 const getImageWithIndex = (name, index) => {
   return new Promise((resolve, reject) => {
-    console.log(`getImageWithInex(${name}, ${index})...`)
+    console.log(`getImageWithIndex(${name}, ${index})...`)
     listDirectoryFiles(name).then(files => {
       console.log(`files.length = ${files.length}`)
-      console.log(`files[0] = ...`)
+      console.log('files[0] = ...')
       console.log(files[0])
-      
+
       if (!index) index = chance.integer({ min: 0, max: files.length })
       else if (index > files.length) resolve(undefined)
+
+      console.log(`index = ${index}`)
 
       for (let x = 0; x < files.length; x++) {
         const file = files[x]
         const key = file.Key
 
         if (key.substring(key.indexOf('/') + 1).toLowerCase().startsWith(`${name}-${index}`)) {
+          console.log(`Found it? key = ${key}`)
           S3.getObject({
             Bucket: 'ansel',
             Key: key

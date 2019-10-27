@@ -1,0 +1,53 @@
+trigger:
+- master
+
+pool:
+  name: Azure Pipelines
+
+steps:
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace tokens in Dockerfile'
+  inputs:
+    targetFiles: Dockerfile
+
+- task: Docker@2
+  displayName: buildAndPush
+  inputs:
+    containerRegistry: 'Docker Hub - 4lch4'
+    repository: 4lch4/ansel
+    Dockerfile: Dockerfile
+    tags: |
+     $(Build.BuildId)
+     latest
+
+- powershell: |
+   $WHURL = "https://discordapp.com/api/webhooks/625127889154867200/YGIzCbBAQ04YDlHFcTGKOJj9JWDsband-Bsbo73ds3F3j598wgvkAwXRqEmY6HRB3CIR"
+   
+   $ReqBody = @{
+     content = "$(Build.QueuedBy) queued a build for the $(Build.Repository.Name) repository on the ``$(Build.SourceBranchName)`` branch.";
+     embeds = @(
+       @{
+         title = '$(Build.DefinitionName)';
+         description = "Build on ``$(Build.SourceBranchName)`` branch has completed.";
+         url = 'https://dev.azure.com/4lch4/Ansel/_build/results?buildId=$(Build.BuildId)';
+         fields = @(
+           @{
+             name = 'Job Status';
+             value = '$(Agent.JobStatus)';
+           },
+           @{
+             name = 'Build Id';
+             value = '$(Build.BuildId)';
+           }
+         )
+       }
+     )
+   }
+   
+   $Json = $ReqBody | ConvertTo-Json -Depth 10 -Compress
+   
+   Write-Host $Json
+   
+   Invoke-RestMethod -Uri $WHURL -Method Post -ContentType 'application/json' -Body $Json
+  displayName: 'PowerShell Script'
+

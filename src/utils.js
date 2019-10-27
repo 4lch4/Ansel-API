@@ -22,24 +22,25 @@ const getImageWithIndex = (name, index) => {
       for (let x = 0; x < files.length; x++) {
         const file = files[x]
         if (file) {
-        const key = file.Key
-        const compA = key.substring(key.indexOf('/') + 1).toLowerCase()
-        const compB = `${name}-${index}`
+          const key = file.Key
+          const compA = key.substring(key.indexOf('/') + 1).toLowerCase()
+          const compB = `${name}-${index}`
 
-        if (compA.startsWith(compB)) {
-          found = true
-          S3.getObject({
-            Bucket: 'ansel',
-            Key: key
-          }, (err, obj) => {
-            if (err) reject(err)
-            else {
-              resolve({
-                obj: obj,
-                url: `https://nyc3.digitaloceanspaces.com/ansel/${key}`
-              })
-            }
-          })
+          if (compA.startsWith(compB)) {
+            found = true
+            S3.getObject({
+              Bucket: 'ansel',
+              Key: key
+            }, (err, obj) => {
+              if (err) reject(err)
+              else {
+                resolve({
+                  obj: obj,
+                  url: `https://nyc3.digitaloceanspaces.com/ansel/${key}`
+                })
+              }
+            })
+          }
         }
       }
 

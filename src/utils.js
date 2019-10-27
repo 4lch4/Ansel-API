@@ -32,6 +32,7 @@ const getImageWithIndex = (name, index) => {
         const compA = key.substring(key.indexOf('/') + 1).toLowerCase()
         const compB = `${name}-${index}`
         console.log(`x = ${x}`)
+        console.log(`key = ${key}`)
         console.log(`compA = ${compA}`)
         console.log(`compB = ${compB}`)
 

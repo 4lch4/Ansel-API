@@ -45,6 +45,18 @@ const getImageWithIndex = (name, index) => {
       }
 
       if (!found) {
+        S3.getObject({
+          Bucket: 'ansel',
+          Key: files[1].Key
+        }, (err, obj) => {
+          if (err) reject(err)
+          else {
+            resolve({
+              obj: obj,
+              url: `https://nyc3.digitaloceanspaces.com/ansel/${files[1].Key}`
+            })
+          }
+        })
         resolve(undefined)
       }
     })

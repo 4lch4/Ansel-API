@@ -37,7 +37,7 @@ const getImageWithIndex = (name, index) => {
               if (err) reject(err)
               else {
                 resolve({
-                  type: `${filename.substring(filename.indexOf('.'))}`,
+                  type: `${filename.substring(filename.indexOf('.') + 1)}`,
                   obj: obj,
                   url: `https://nyc3.digitaloceanspaces.com/ansel/${key}`
                 })

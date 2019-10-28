@@ -1,7 +1,7 @@
 $WHURL = "$(DISCORD_WH_URL)"
 
 $ReqBody = @{
-  content = "(Build.SourceVersionMessage) ➥ $(Build.QueuedBy) queued a build for the $(Build.Repository.Name) repository on the ``$(Build.SourceBranchName)`` branch.";
+  content = "$(Build.SourceVersionMessage) -- $(Build.QueuedBy) queued a build for the $(Build.Repository.Name) repository on the ``$(Build.SourceBranchName)`` branch.";
   embeds = @(
     @{
       title = '$(Build.DefinitionName)';

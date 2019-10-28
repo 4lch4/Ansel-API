@@ -21,7 +21,6 @@ module.exports = server => {
       }
 
       getImageWithIndex(data.name, data.index).then(image => {
-        console.log(image)
         const returnImage = data.return_image ? data.return_image : false
         if (image) {
           if (returnImage) res.type(image.type).send(200, image.obj.Body)

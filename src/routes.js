@@ -22,6 +22,7 @@ module.exports = server => {
 
       getImageWithIndex(data.name, data.index).then(image => {
         const returnImage = data.return_image ? data.return_image : false
+        console.log(`returnImage = ${returnImage}`)
         if (image) {
           if (returnImage) res.type('image/gif').send(200, image.obj.Body)
           else res.send(200, image.url)

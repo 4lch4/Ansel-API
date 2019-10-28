@@ -12,6 +12,7 @@ const S3 = new AWS.S3({ endpoint: new AWS.Endpoint('nyc3.digitaloceanspaces.com'
  * @param {number} [index] The number of the specific reaction image/gif you wish to retrieve.
  */
 const getImageWithIndex = (name, index) => {
+  name = name.toLowerCase()
   let found = false
 
   return new Promise((resolve, reject) => {
@@ -24,6 +25,7 @@ const getImageWithIndex = (name, index) => {
         if (file) {
           const key = file.Key
           const compA = key.substring(key.indexOf('/') + 1).toLowerCase()
+          const filename = compA.substring(compA.indexOf('/') + 1)
           const compB = `${name}-${index}`
 
           if (compA.startsWith(compB)) {
@@ -35,6 +37,7 @@ const getImageWithIndex = (name, index) => {
               if (err) reject(err)
               else {
                 resolve({
+                  type: `${filename.substring(filename.indexOf('.'))}`,
                   obj: obj,
                   url: `https://nyc3.digitaloceanspaces.com/ansel/${key}`
                 })
@@ -44,21 +47,7 @@ const getImageWithIndex = (name, index) => {
         }
       }
 
-      if (!found) {
-        S3.getObject({
-          Bucket: 'ansel',
-          Key: files[1].Key
-        }, (err, obj) => {
-          if (err) reject(err)
-          else {
-            resolve({
-              obj: obj,
-              url: `https://nyc3.digitaloceanspaces.com/ansel/${files[1].Key}`
-            })
-          }
-        })
-        resolve(undefined)
-      }
+      if (!found) resolve(undefined)
     })
   })
 }

@@ -9,6 +9,10 @@ $ReqBody = @{
       url = 'https://dev.azure.com/4lch4/Ansel/_build/results?buildId=$(Build.BuildId)';
       fields = @(
         @{
+          name = 'Commit Message';
+          value = '$(Build.SourceVersionMessage)';
+        },
+        @{
           name = 'Job Status';
           value = '$(Agent.JobStatus)';
         },

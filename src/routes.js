@@ -24,8 +24,10 @@ module.exports = server => {
         const returnImage = data.return_image ? data.return_image : false
         console.log(`returnImage = ${returnImage}`)
         if (image) {
-          if (returnImage) res.type('image/gif').send(image.obj.Body)
-          else res.send(200, image.url)
+          if (returnImage) {
+            res.set('Content-Type', 'image/gif')
+            res.send(image.obj.Body)
+          } else res.send(200, image.url)
         } else res.send(200, 'No image was found with the given index 😢')
 
         return next()

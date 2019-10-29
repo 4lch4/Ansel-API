@@ -1,7 +1,7 @@
 {
   "name": "ansel",
   "displayName": "Ansel",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An image retrieval API.",
   "main": "index.js",
   "scripts": {

@@ -1,3 +1,4 @@
+#!/bin/bash
 # Stop currently running container.
 docker stop ansel
 

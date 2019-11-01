@@ -6,11 +6,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "k8s:apply": "kubectl create namespace ansel; kubectl apply -f ./manifests"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/4lch4/ansel"
+    "url": "https://github.com/4lch4/Ansel"
   },
   "author": {
     "name": "4lch4",

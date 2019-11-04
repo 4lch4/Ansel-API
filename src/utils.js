@@ -7,7 +7,7 @@ const S3 = new AWS.S3({ endpoint: new AWS.Endpoint('nyc3.digitaloceanspaces.com'
 const getDirectories = () => {
   return new Promise((resolve, reject) => {
     S3.listObjectsV2({
-      Bucket: 'Ansel',
+      Bucket: 'ansel',
       Delimiter: '/'
     }, (err, data) => {
       if (err) reject(err)

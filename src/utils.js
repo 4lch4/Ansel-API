@@ -4,6 +4,18 @@ const chance = new Chance()
 const AWS = require('aws-sdk')
 const S3 = new AWS.S3({ endpoint: new AWS.Endpoint('nyc3.digitaloceanspaces.com') })
 
+const getDirectories = () => {
+  return new Promise((resolve, reject) => {
+    S3.listObjectsV2({
+      Bucket: 'Ansel',
+      Delimiter: '/'
+    }, (err, data) => {
+      if (err) reject(err)
+      else resolve(data)
+    })
+  })
+}
+
 /**
  * Retrieves an image from the Ansel DO Spaces with the provided name and index,
  * if one is provided. If there is no index then a random image is returned.
@@ -62,3 +74,4 @@ const listDirectoryFiles = directoryName => {
 }
 
 module.exports.getImageWithIndex = getImageWithIndex
+module.exports.getDirectories = getDirectories

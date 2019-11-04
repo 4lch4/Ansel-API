@@ -1,5 +1,5 @@
 const Errors = require('restify-errors')
-const { getImageWithIndex } = require('./utils')
+const { getImageWithIndex, getDirectories } = require('./utils')
 
 module.exports = server => {
   server.get('/', (req, res, next) => {
@@ -37,6 +37,22 @@ module.exports = server => {
       })
     } else {
       return next(new Errors.InvalidContentError("Only 'application/json', 'application/octet-stream', or 'application/xml' requests accepted."))
+    }
+  })
+
+  server.get('/list/reactions', (req, res, next) => {
+    if (req.is('application/json') || req.is('application/octet-stream')) {
+      getDirectories().then(directories => {
+        console.log('Directories...')
+        console.log(directories)
+        res.send(200, directories)
+        return next()
+      }).catch(err => {
+        res.send(500, err)
+        return next(err)
+      })
+    } else {
+      return next(new Errors.InvalidContentError("Only 'application/json' or 'application/octet-stream' requests accepted."))
     }
   })
 

@@ -24,7 +24,7 @@
     "fs-extra": "8.1.0",
     "morgan": "1.9.1",
     "restify": "8.4.1",
-    "restify-errors": "8.0.1"
+    "restify-errors": "8.0.2"
   },
   "devDependencies": {
     "eslint": "6.7.2",

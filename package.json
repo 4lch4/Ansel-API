@@ -19,7 +19,7 @@
   },
   "license": "BSD-2-Clause",
   "dependencies": {
-    "aws-sdk": "2.580.0",
+    "aws-sdk": "2.818.0",
     "chance": "1.1.3",
     "fs-extra": "8.1.0",
     "morgan": "1.9.1",

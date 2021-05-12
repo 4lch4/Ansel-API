@@ -20,7 +20,7 @@ server.use(restify.plugins.queryParser({ mapParams: true }))
 server.use(restify.plugins.fullResponse())
 
 server.listen(PORT, () => {
-  require('./src/routes')(server)
+  require('../src/routes')(server)
 
   console.log(`${APP_NAME}-v${APP_VERSION} is now serving on port ${PORT}...`)
 })

@@ -1,3 +1,4 @@
+import { printRoutes } from '@4lch4/koa-router-printer'
 import { logger } from '@4lch4/logger'
 import Koa from 'koa'
 import KBody from 'koa-body'
@@ -10,6 +11,7 @@ const app = new Koa()
 app.use(Helmet())
 app.use(KBody())
 app.use(KBLogger())
+
 app.use(function (ctx, next) {
   ctx.log.info('Got a request from %s for %s', ctx.request.ip, ctx.path)
   return next()
@@ -20,6 +22,10 @@ for (const route of getRoutes()) {
   app.use(route.allowedMethods())
 }
 
+printRoutes(app)
+
 app.listen(AppConfig.port, () => {
-  logger.success(`${AppConfig.name}-v${AppConfig.version} has come online!`)
+  logger.success(
+    `${AppConfig.name}-v${AppConfig.version} has come online, listening on port ${AppConfig.port}!`
+  )
 })

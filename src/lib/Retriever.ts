@@ -26,7 +26,9 @@ export class Retriever {
           if (err) reject(err)
           else {
             resolve({
-              data: data.CommonPrefixes?.map(val => val.Prefix),
+              data: data.CommonPrefixes?.map(val =>
+                val.Prefix?.substring(0, val.Prefix.length - 1)
+              ).sort(),
               count: data.KeyCount
             })
           }

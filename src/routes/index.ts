@@ -3,7 +3,7 @@ import { GetEndpoint } from './Get'
 import { HealthEndpoint } from './Health'
 import { ListEndpoint } from './List'
 
-const Endpoints = [HealthEndpoint, GetEndpoint, ListEndpoint]
+const Endpoints = [ListEndpoint, GetEndpoint, HealthEndpoint]
 
 export function getRoutes(): Router[] {
   const routes: Router[] = []

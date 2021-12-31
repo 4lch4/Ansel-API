@@ -13,5 +13,8 @@ export const AppConfig: IAppConfig = {
   apiPrefix: process.env.API_PREFIX || NA,
   spacesEndpoint: process.env.SPACES_ENDPOINT || NA,
   bucketName: process.env.BUCKET_NAME || NA,
-  imgBaseUrl: process.env.IMG_BASE_URL || NA
+  imgBaseUrl: process.env.IMG_BASE_URL || NA,
+  spacesAccessKeyId: process.env.SPACES_ACCESS_KEY_ID || NA,
+  spacesSecretAccessKey: process.env.SPACES_SECRET_ACCESS_KEY || NA,
+  logRocketId: process.env.LOGROCKET_ID || NA
 }

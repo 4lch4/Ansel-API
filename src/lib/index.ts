@@ -1,3 +1,3 @@
 export * from './BaseEndpoint'
-export * from './Retriever'
+export * from './BucketRetriever'
 export * from './Utils'

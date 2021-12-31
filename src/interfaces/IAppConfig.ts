@@ -19,4 +19,13 @@ export interface IAppConfig {
 
   /** The base URL for all images within Ansel. */
   imgBaseUrl: string
+
+  /** The access key ID for the DigitalOcean Spaces instance. */
+  spacesAccessKeyId: string
+
+  /** The secret access key for the DigitalOcean Spaces instance. */
+  spacesSecretAccessKey: string
+
+  /** The LogRocket ID for the application. */
+  logRocketId: string
 }

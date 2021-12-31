@@ -5,6 +5,7 @@ import Koa from 'koa'
 import KBody from 'koa-body'
 // import KBLogger from 'koa-bunyan-logger'
 import Helmet from 'koa-helmet'
+import LogRocket, { log } from 'logrocket'
 import { AppConfig } from './configs'
 import { getRoutes } from './routes'
 

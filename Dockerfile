@@ -1,16 +1,12 @@
-FROM node:10
+FROM node:16-alpine
 
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm i --production
+WORKDIR /app
 
 COPY . .
 
-EXPOSE 4242
+RUN npm install
+RUN npm run build
 
-ENV AWS_ACCESS_KEY_ID=#{AWS_ACCESS_KEY_ID}#
-ENV AWS_SECRET_ACCESS_KEY=#{AWS_SECRET_ACCESS_KEY}#
+EXPOSE 8080
 
-CMD ["npm", "start"]
+CMD [ "npm", "start" ]

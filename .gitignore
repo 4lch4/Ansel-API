@@ -1,3 +1,5 @@
-node\_modules
-pnpm-lock.json
-*.log
+node_modules
+local.settings.json
+dist
+coverage
+**/.DS_Store

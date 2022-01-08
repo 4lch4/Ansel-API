@@ -1,0 +1,16 @@
+config:
+  target: 'http://wontresolve.local:3003'
+  phases:
+    - duration: 10
+      arrivalRate: 1
+  environments:
+    production:
+      target: 'http://wontresolve.prod:44321'
+      phases:
+        - duration: 120
+          arrivalRate: 10
+    staging:
+      target: 'http://127.0.0.1:3003'
+      phases:
+        - duration: 1200
+          arrivalRate: 20

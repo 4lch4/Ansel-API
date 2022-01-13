@@ -3,3 +3,4 @@ local.settings.json
 dist
 coverage
 **/.DS_Store
+.env

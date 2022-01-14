@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/4lch4/Ansel/_apis/build/status/Ansel-CI?branchName=master)](https://dev.azure.com/4lch4/Ansel/_build/latest?definitionId=6&branchName=master)
+[![Build Status](https://dev.azure.com/4lch4/Ansel/_apis/build/status/Ansel-CI?branchName=master)](https://dev.azure.com/4IS/Ansel/_build/latest?definitionId=&branchName=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a58e2f46380c4910808923b059914752)](https://www.codacy.com/manual/4lch4/Ansel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=4lch4/Ansel&amp;utm_campaign=Badge_Grade)
 [![dependencies Status](https://img.shields.io/david/HF-Solutions/Tron.svg?style=flat-square)](https://david-dm.org/4lch4/Ansel)
 
@@ -22,7 +22,7 @@
 
 # Ansel
 
-Ansel is an API written in TypeScript using the Koa framework, providing endpoints to retrieve images/data from S3 buckets. It was written to be used by my Discord bot, Tron, for commands that are image based such as `+wink` which would return a wink gif/image.
+Ansel is an API written in [TypeScript][3] using the [KoaJS framework][4], providing endpoints to retrieve images/data from S3 buckets. It was written to be used by my Discord bot, Tron, for commands that are image based such as `+wink` which would return a wink gif/image.
 
 ## Name
 
@@ -185,3 +185,5 @@ OK
 [0]: https://en.wikipedia.org/wiki/Ansel_Adams
 [1]: http://anseladams.com/
 [2]: https://httpie.io/
+[3]: https://www.typescriptlang.org/
+[4]: https://koajs.com/

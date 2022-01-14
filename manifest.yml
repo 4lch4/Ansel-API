@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: '#{APP_NAMESPACE}#'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: '#{APP_NAMESPACE}#'
+  name: '#{APP_LOWER_NAME}#-configmap'
+data:
+  APP_NAME: '#{APP_NAME}#'
+  APP_VERSION: '#{APP_VERSION}#'
+  APP_PORT: '#{APP_PORT}#'
+  API_PREFIX: '#{API_PREFIX}#'
+  BUCKET_NAME: '#{BUCKET_NAME}#'
+  BUCKET_ENDPOINT: '#{BUCKET_ENDPOINT}#'
+  BUCKET_ACCESS_KEY_ID: '#{BUCKET_ACCESS_KEY_ID}#'
+  BUCKET_SECRET_ACCESS_KEY: '#{BUCKET_SECRET_ACCESS_KEY}#'
+  IMG_BASE_URL: '#{IMG_BASE_URL}#'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '#{APP_LOWER_NAME}#'
+  namespace: '#{APP_NAMESPACE}#'
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: '#{APP_LOWER_NAME}#'
+  template:
+    metadata:
+      labels:
+        app: '#{APP_LOWER_NAME}#'
+    spec:
+      containers:
+        - name: '#{APP_LOWER_NAME}#'
+          image: '#{DockerRepo}#/#{APP_LOWER_NAME}#:#{Build.SourceVersion}#'
+          resources:
+            limits:
+              cpu: '600m'
+              memory: '750Mi'
+            requests:
+              cpu: '200m'
+              memory: '250Mi'
+          envFrom:
+            - configMapRef:
+                name: '#{APP_LOWER_NAME}#-configmap'
+          ports:
+            - containerPort: #{APP_PORT}#
+          livenessProbe:
+            httpGet:
+              path: '#{API_PREFIX}#/health/liveness'
+              port: #{APP_PORT}#
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: '#{API_PREFIX}#/health/readiness'
+              port: #{APP_PORT}#
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 10
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: '#{APP_LOWER_NAME}#'
+  namespace: '#{APP_NAMESPACE}#'
+  labels:
+    app: '#{APP_LOWER_NAME}#'
+spec:
+  type: ClusterIP
+  ports:
+    - port: #{APP_PORT}#
+      name: web
+  selector:
+    app: '#{APP_LOWER_NAME}#'
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: '#{APP_LOWER_NAME}#'
+  namespace: '#{APP_NAMESPACE}#'
+  annotations:
+    kubernetes.io/ingress.class: 'nginx'
+spec:
+  rules:
+    - host: '#{DNS_HOST_NAME}#'
+      http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: '#{APP_LOWER_NAME}#'
+              servicePort: #{APP_PORT}#

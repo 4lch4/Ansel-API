@@ -20,20 +20,20 @@ export class GetEndpoint extends BaseEndpoint {
 
         if (imageName) {
           Successful.ok(ctx, { body: getImageUrl(dirName, imageName) })
-          logger.success(`${ctx.method} ⸺ ${ctx.path} ⇥ (${ctx.status})`)
+          logger.success(`${ctx.method} ⇥ ${ctx.path} ⇥ (${ctx.status})`)
         } else {
           ClientErrors.notFound(ctx, {
             body: `No image found for ${dirName} with id ${id}`
           })
-          logger.error(`${ctx.method} ⸺ ${ctx.path} ⇥ (404)`)
+          logger.error(`${ctx.method} ⇥ ${ctx.path} ⇥ (404)`)
         }
       } else {
         ClientErrors.notFound(ctx, { body: `No images found for ${dirName}` })
-        logger.error(`${ctx.method} ⸺ ${ctx.path} ⸺ ${dirName} ⇥ (404)`)
+        logger.error(`${ctx.method} ⇥ ${ctx.path} ⇥ ${dirName} ⇥ (404)`)
       }
     } catch (err) {
       ServerErrors.internalServerError(ctx, { body: err })
-      logger.error(`${ctx.method} ⸺ ${ctx.path} ⇥ (404)`)
+      logger.error(`${ctx.method} ⇥ ${ctx.path} ⇥ (404)`)
       logger.error(err)
     }
   }

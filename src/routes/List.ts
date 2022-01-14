@@ -11,10 +11,10 @@ export class ListEndpoint extends BaseEndpoint {
       const res = await retriever.getDirectoryList()
 
       Successful.ok(ctx, { body: res })
-      logger.success(`${ctx.method} ⸺ ${ctx.path} ⇥ (${ctx.status})`)
+      logger.success(`${ctx.method} ⇥ ${ctx.path} ⇥ (${ctx.status})`)
     } catch (err) {
       ServerErrors.internalServerError(ctx, { body: err })
-      logger.error(`${ctx.method} ⸺ ${ctx.path} ⇥ (${ctx.status})`)
+      logger.error(`${ctx.method} ⇥ ${ctx.path} ⇥ (${ctx.status})`)
       logger.error(err)
     }
   }

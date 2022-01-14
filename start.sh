@@ -3,15 +3,15 @@
 LOCAL_SETTINGS=$(cat settings.json)
 PACKAGE_JSON=$(cat package.json)
 
-APP_NAME=$(echo $PACKAGE_JSON | jq -r .displayName)
-VERSION=$(echo $PACKAGE_JSON | jq -r .version)
-PORT=$(echo $LOCAL_SETTINGS | jq -r .port)
-API_PREFIX=$(echo $LOCAL_SETTINGS | jq -r .apiPrefix)
-BUCKET_NAME=$(echo $LOCAL_SETTINGS | jq -r .bucketName)
-IMG_BASE_URL=$(echo $LOCAL_SETTINGS | jq -r .imgBaseUrl)
-BUCKET_ENDPOINT=$(echo $LOCAL_SETTINGS | jq -r .bucketEndpoint)
-BUCKET_ACCESS_KEY_ID=$(echo $LOCAL_SETTINGS | jq -r .bucketAccessKeyId)
-BUCKET_SECRET_ACCESS_KEY=$(echo $LOCAL_SETTINGS | jq -r .bucketSecretAccessKey)
+APP_NAME=$(echo "$PACKAGE_JSON" | jq -r .displayName)
+VERSION=$(echo "$PACKAGE_JSON" | jq -r .version)
+PORT=$(echo "$LOCAL_SETTINGS" | jq -r .port)
+API_PREFIX=$(echo "$LOCAL_SETTINGS" | jq -r .apiPrefix)
+BUCKET_NAME=$(echo "$LOCAL_SETTINGS" | jq -r .bucketName)
+IMG_BASE_URL=$(echo "$LOCAL_SETTINGS" | jq -r .imgBaseUrl)
+BUCKET_ENDPOINT=$(echo "$LOCAL_SETTINGS" | jq -r .bucketEndpoint)
+BUCKET_ACCESS_KEY_ID=$(echo "$LOCAL_SETTINGS" | jq -r .bucketAccessKeyId)
+BUCKET_SECRET_ACCESS_KEY=$(echo "$LOCAL_SETTINGS" | jq -r .bucketSecretAccessKey)
 
 docker run -p $PORT:$PORT -d \
   -e BUCKET_ENDPOINT=$BUCKET_ENDPOINT \

@@ -13,7 +13,7 @@ resources:
 
 variables:
   - name: 'AppVersion'
-    value: '0.2.0'
+    value: '0.3.0'
 
 stages:
   - stage: Build

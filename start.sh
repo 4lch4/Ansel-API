@@ -1,10 +1,9 @@
 #!/bin/bash
 
-LOCAL_SETTINGS=$(cat local.settings.json)
+LOCAL_SETTINGS=$(cat settings.json)
 PACKAGE_JSON=$(cat package.json)
 
 APP_NAME=$(echo $PACKAGE_JSON | jq -r .displayName)
-DOCKER_APP_NAME=$(echo $PACKAGE_JSON | jq -r .name)
 VERSION=$(echo $PACKAGE_JSON | jq -r .version)
 PORT=$(echo $LOCAL_SETTINGS | jq -r .port)
 API_PREFIX=$(echo $LOCAL_SETTINGS | jq -r .apiPrefix)

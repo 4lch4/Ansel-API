@@ -1,0 +1,10 @@
+{
+  "appName": "Ansel",
+  "port": "8080",
+  "apiPrefix": "/api/v1",
+  "imgBaseUrl": "https://ansel.4lch4.tech",
+  "bucketName": "ansel",
+  "bucketEndpoint": "nyc3.digitaloceanspaces.com",
+  "bucketAccessKeyId": "ABCDEFGHIJKLMNOPQRST",
+  "bucketSecretAccessKey": "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&"
+}

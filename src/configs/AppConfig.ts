@@ -9,8 +9,8 @@ const NA = 'Unknown'
  */
 export const AppConfig: IAppConfig = {
   name: process.env.APP_NAME || NA,
-  version: process.env.VERSION || NA,
-  port: parseInt(process.env.PORT || '8080'),
+  version: process.env.APP_VERSION || NA,
+  port: parseInt(process.env.APP_PORT || '8080'),
   apiPrefix: process.env.API_PREFIX || NA,
   bucketName: process.env.BUCKET_NAME || NA,
   imgBaseUrl: process.env.IMG_BASE_URL || NA,

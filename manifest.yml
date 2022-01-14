@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
         - name: '#{APP_LOWER_NAME}#'
-          image: '#{DockerRepo}#/#{APP_LOWER_NAME}#:#{Build.SourceVersion}#'
+          image: '#{DockerRepo}#/#{APP_LOWER_NAME}#:#{APP_VERSION}#'
           resources:
             limits:
               cpu: '600m'

@@ -32,7 +32,11 @@ stages:
             inputs:
               targetType: 'inline'
               script: 'rm -rf $(Build.SourcesDirectory)'
-
+      - job: StatusReport
+        displayName: Status Report
+        dependsOn: 'Build'
+        pool: server
+        steps:
           - task: InvokeRESTAPI@1
             inputs:
               connectionType: 'connectedServiceName'

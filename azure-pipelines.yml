@@ -32,15 +32,3 @@ stages:
             inputs:
               targetType: 'inline'
               script: 'rm -rf $(Build.SourcesDirectory)'
-
-          - task: InvokeRESTAPI@1
-            inputs:
-              connectionType: 'connectedServiceName'
-              serviceConnection: 'Discord Webhook Channel'
-              method: 'POST'
-              body: |
-                {
-                  "content": "$(Build.BuildId) ⸺ $(Agent.JobStatus)!",
-                  "username": "4ISADO"
-                }
-              waitForCompletion: 'false'

@@ -27,16 +27,16 @@ stages:
               tags: |
                 $(Build.BuildId)
                 latest
-          - task: Bash@3
-            displayName: Task Cleanup
-            inputs:
-              targetType: 'inline'
-              script: 'rm -rf $(Build.SourcesDirectory)'
           - task: PublishPipelineArtifact@1
             inputs:
               targetPath: '$(Build.SourcesDirectory)/manifest.yml'
               artifact: 'manifest'
               publishLocation: 'pipeline'
+          - task: Bash@3
+            displayName: Task Cleanup
+            inputs:
+              targetType: 'inline'
+              script: 'rm -rf $(Build.SourcesDirectory)'
 
       - job: StatusReport
         displayName: Status Report

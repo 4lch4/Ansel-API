@@ -1,2 +1,13 @@
-node_modules
+.env
+.git
+.github
+.gitignore
+.nvmrc
+.vscode
+artillery
 dist
+local.settings.json
+node_modules
+README.md
+start.sh
+SUPPORT.md

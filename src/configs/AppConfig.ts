@@ -15,7 +15,7 @@ if (!process.env.API_PREFIX) config({ path: envPath })
 export const AppConfig: IAppConfig = {
   name: process.env.APP_NAME || NA,
   version: process.env.VERSION || NA,
-  port: parseInt(process.env.PORT || '3000'),
+  port: parseInt(process.env.PORT || '8080'),
   apiPrefix: process.env.API_PREFIX || NA,
   bucketName: process.env.BUCKET_NAME || NA,
   imgBaseUrl: process.env.IMG_BASE_URL || NA,

@@ -7,13 +7,34 @@
 
 # Ansel
 
-Ansel is a lightweight API for retrieving images of a certain type. Mostly
-useful for stuff like Tron, where a lot of the commands for it are simply
-pulling images from a folder like **Wink** for the `+wink` command.
+Ansel is an API written in TypeScript using the Koa framework, providing endpoints to retrieve images/data from S3 buckets. It was written to be used by my Discord bot, Tron, for commands that are image based such as `+wink` which would return a wink gif/image.
 
 ## Name
 
 Ansel is named after [Ansel][1] [Adams][0].
+
+## Setup
+
+To use the application you must provide a few environment variables to the Docker image. The `start.sh` script shows exactly what parameters are needed, but we'll go over them here:
+
+- APP_NAME
+  - The display name of the application. Ansel by default.
+- VERSION
+  - The version of the application.
+- PORT
+  - The port to listen on, defaults to 8080.
+- API_PREFIX
+  - The prefix of all endpoints, defaults to `/api/v1`.
+- IMG_BASE_URL
+  - The URL to append to the beginning of each image URL.
+- BUCKET_NAME
+  - The name of the bucket containing your images.
+- BUCKET_ENDPOINT
+  - The url/endpoint for accessing the s3 API of the given bucket.
+- BUCKET_ACCESS_KEY_ID
+  - The access key id for the s3 bucket that contains your images.
+- BUCKET_SECRET_ACCESS_KEY
+  - The secret access key for the s3 bucket that contains your images.
 
 [0]: https://en.wikipedia.org/wiki/Ansel_Adams
 [1]: http://anseladams.com/

@@ -1,5 +1,11 @@
+import { config } from 'dotenv'
+import { join } from 'path'
 import { IAppConfig } from '../interfaces'
+
+const envPath = join(__dirname, '..', '..', '.env')
 const NA = 'Unknown'
+
+if (!process.env.API_PREFIX) config({ path: envPath })
 
 /**
  * The default values needed for the Application to function properly. All of
@@ -11,10 +17,10 @@ export const AppConfig: IAppConfig = {
   version: process.env.VERSION || NA,
   port: parseInt(process.env.PORT || '3000'),
   apiPrefix: process.env.API_PREFIX || NA,
-  spacesEndpoint: process.env.SPACES_ENDPOINT || NA,
   bucketName: process.env.BUCKET_NAME || NA,
   imgBaseUrl: process.env.IMG_BASE_URL || NA,
-  spacesAccessKeyId: process.env.SPACES_ACCESS_KEY_ID || NA,
-  spacesSecretAccessKey: process.env.SPACES_SECRET_ACCESS_KEY || NA,
+  bucketEndpoint: process.env.BUCKET_ENDPOINT || NA,
+  bucketAccessKeyId: process.env.BUCKET_ACCESS_KEY_ID || NA,
+  bucketSecretAccessKey: process.env.BUCKET_SECRET_ACCESS_KEY || NA,
   logRocketId: process.env.LOGROCKET_ID || NA
 }

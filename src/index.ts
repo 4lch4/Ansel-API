@@ -37,4 +37,8 @@ app.listen(AppConfig.port, () => {
   logger.success(
     `${AppConfig.name}-v${AppConfig.version} has come online, listening on port ${AppConfig.port}!`
   )
+
+  log(
+    `${AppConfig.name}-v${AppConfig.version} has come online, listening on port ${AppConfig.port}!`
+  )
 })

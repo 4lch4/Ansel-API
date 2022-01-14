@@ -18,11 +18,19 @@ stages:
       - job: Build
         displayName: Build
         steps:
+          # - task: Bash@3
+          #   displayName: Build and Push Image
+          #   inputs:
+          #     targetType: 'inline'
+          #     script: |
+          #       docker build -t 4lch4/ansel:latest -4lch4/ansel:$(Build.BuildId) .
+          #       docker push 4lch4/ansel -a
+
           - task: Docker@2
             displayName: Build and Push Image
             inputs:
               containerRegistry: 'Docker Hub - 4lch4'
-              repository: 'Ansel'
+              repository: '4lch4/ansel'
               command: 'buildAndPush'
               tags: |
                 $(Build.BuildId)

@@ -26,8 +26,7 @@
     "koa-body": "^4.2.0",
     "koa-bunyan-logger": "^2.1.0",
     "koa-helmet": "^6.1.0",
-    "koa-logger": "^3.2.1",
-    "logrocket": "^2.1.2"
+    "koa-logger": "^3.2.1"
   },
   "devDependencies": {
     "@types/ioredis": "^4.28.1",
@@ -56,6 +55,9 @@
   "keywords": [
     "API",
     "DigitalOcean-Spaces",
+    "S3",
+    "S3-Object-Storage",
+    "S3-bucket",
     "Images",
     "Image-Retrieval",
     "Image-Retrieval-API"

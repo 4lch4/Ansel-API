@@ -21,24 +21,14 @@ config:
 
   environments:
     production:
-      target: 'https://ansel.4lch4.tech/api/v1'
+      target: 'https://ansel.4lch4.cloud/api/v1'
     testing:
-      target: 'https://ansel-dev.4lch4.tech/api/v1'
+      target: 'https://ansel-test.4lch4.cloud/api/v1'
 
 scenarios:
-  # - name: 'Health Check Endpoints'
-  #   flow:
-  #     - get:
-  #         url: '/health/liveness'
-  #     - get:
-  #         url: '/health/readiness'
-  #     - think: 5
-
   - name: 'Get Images'
     flow:
       - get:
           url: '/get/{{ folderName }}'
-      # - get:
-      #     url: '/list'
-      #     capture:
-      #       - json: '$.data'
+      - get:
+          url: '/list'

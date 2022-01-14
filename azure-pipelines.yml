@@ -44,6 +44,6 @@ stages:
               method: 'POST'
               body: |
                 {
-                  "content": "$(Build.BuildId) ⸺ $(Agent.JobStatus)!",
+                  "content": "$(Build.BuildId) ⸺ $(Agent.JobStatus)",
                   "username": "4ISADO"
                 }

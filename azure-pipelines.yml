@@ -32,6 +32,12 @@ stages:
             inputs:
               targetType: 'inline'
               script: 'rm -rf $(Build.SourcesDirectory)'
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: '$(Build.SourcesDirectory)/manifest.yml'
+              artifact: 'manifest'
+              publishLocation: 'pipeline'
+
       - job: StatusReport
         displayName: Status Report
         dependsOn: 'Build'

@@ -11,6 +11,10 @@ pool:
 resources:
   - repo: self
 
+variables:
+  - name: 'AppVersion'
+    value: '0.2.0'
+
 stages:
   - stage: Build
     displayName: Build image
@@ -26,6 +30,7 @@ stages:
               command: 'buildAndPush'
               tags: |
                 $(Build.BuildId)
+                $(AppVersion)
                 latest
           - task: PublishPipelineArtifact@1
             displayName: Publish Manifest

@@ -11,9 +11,6 @@ pool:
 resources:
   - repo: self
 
-variables:
-  tag: '$(Build.BuildId)'
-
 stages:
   - stage: Build
     displayName: Build image
@@ -30,3 +27,8 @@ stages:
               tags: |
                 $(Build.BuildId)
                 latest
+          - task: Bash@3
+            displayName: Task Cleanup
+            inputs:
+              targetType: 'inline'
+              script: 'rm -rf $(Build.SourcesDirectory)'

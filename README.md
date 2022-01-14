@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/4IS/Ansel/_apis/build/status/4lch4.Ansel?branchName=master)](https://dev.azure.com/4IS/Ansel/_build/latest?definitionId=22&branchName=master)
+[![Build Status](https://dev.azure.com/4IS/Ansel/_apis/build/status/Ansel-API?branchName=main)](https://dev.azure.com/4IS/Ansel/_build/latest?definitionId=23&branchName=main)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a58e2f46380c4910808923b059914752)](https://www.codacy.com/manual/4lch4/Ansel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=4lch4/Ansel&amp;utm_campaign=Badge_Grade)
 [![dependencies Status](https://img.shields.io/david/HF-Solutions/Tron.svg?style=flat-square)](https://david-dm.org/4lch4/Ansel)
 

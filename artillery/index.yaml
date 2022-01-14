@@ -1,5 +1,5 @@
 config:
-  target: 'http://localhost:8080/api/v1'
+  target: 'https://ansel.4lch4.cloud/api/v1'
   phases:
     - duration: 60
       arrivalRate: 5
@@ -28,6 +28,7 @@ config:
 scenarios:
   - name: 'Get Images'
     flow:
+      # - log: 'Get {{ folderName }}'
       - get:
           url: '/get/{{ folderName }}'
       - get:

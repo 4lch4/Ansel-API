@@ -1,11 +1,6 @@
-import { config } from 'dotenv'
-import { join } from 'path'
 import { IAppConfig } from '../interfaces'
 
-const envPath = join(__dirname, '..', '..', '.env')
 const NA = 'Unknown'
-
-if (!process.env.API_PREFIX) config({ path: envPath })
 
 /**
  * The default values needed for the Application to function properly. All of

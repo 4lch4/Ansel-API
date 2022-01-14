@@ -5,11 +5,8 @@ import Koa from 'koa'
 import KBody from 'koa-body'
 // import KBLogger from 'koa-bunyan-logger'
 import Helmet from 'koa-helmet'
-import LogRocket, { log } from 'logrocket'
 import { AppConfig } from './configs'
 import { getRoutes } from './routes'
-
-LogRocket.init(AppConfig.logRocketId)
 
 const app = new Koa()
 app.use(Helmet())
@@ -26,19 +23,14 @@ for (const route of getRoutes()) {
 printRoutes(app)
 
 app.use(function (ctx, next) {
-  log(
+  logger.info(
     `[${reqTime}] ➡ [${ctx.request.ip}] ➡ ${ctx.method} ➡ ${ctx.path} ⇥ (${ctx.status})`
   )
-  // logger.info(`[${ctx.request.ip}] -> ${ctx.method} - ${ctx.path}`)
   return next()
 })
 
 app.listen(AppConfig.port, () => {
   logger.success(
-    `${AppConfig.name}-v${AppConfig.version} has come online, listening on port ${AppConfig.port}!`
-  )
-
-  log(
     `${AppConfig.name}-v${AppConfig.version} has come online, listening on port ${AppConfig.port}!`
   )
 })

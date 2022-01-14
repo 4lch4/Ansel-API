@@ -14,9 +14,9 @@ export class Retriever {
 
   constructor() {
     this.client = new S3({
-      endpoint: new Endpoint(AppConfig.spacesEndpoint),
-      accessKeyId: AppConfig.spacesAccessKeyId,
-      secretAccessKey: AppConfig.spacesSecretAccessKey
+      endpoint: new Endpoint(AppConfig.bucketEndpoint),
+      accessKeyId: AppConfig.bucketAccessKeyId,
+      secretAccessKey: AppConfig.bucketSecretAccessKey
     })
   }
 

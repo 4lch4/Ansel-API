@@ -1,5 +1,7 @@
 config:
   target: 'https://ansel.4lch4.cloud/api/v1'
+  tls:
+    rejectUnauthorized: false
   phases:
     - duration: 60
       arrivalRate: 5

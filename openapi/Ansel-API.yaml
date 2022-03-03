@@ -1,0 +1,152 @@
+openapi: 3.1.0
+info:
+  title: Ansel-API
+  version: '1.0'
+  summary: An API for interacting with S3/B2 compatible storage methods
+  description: 'Ansel is an API for interacting with S3/B2 compatible storage mediums. Provides endpoints for uploading, updating, retrieving, and deleting assets within the storage medium.'
+  contact:
+    name: 4lch4
+    url: 'https://4lch4.social'
+    email: ansel@4lch4.email
+  license:
+    name: GPL-3.0-only
+    identifier: GPL-3.0-only
+servers:
+  - url: 'http://localhost:8080'
+    description: Local Test
+  - url: 'https://test.ansel.cloud'
+    description: Ansel Test
+  - url: 'https://ansel.cloud'
+    description: Ansel Prod
+paths:
+  /list:
+    get:
+      summary: List Folders w/in a Bucket
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    count: 54
+                    data:
+                      - alcha
+                      - ami
+                      - battsie
+                      - bite
+                      - blush
+                      - cats
+                      - cheeki
+                      - cheeky
+                      - coffee
+                      - confused
+                      - cry
+                      - dance
+                      - dingle
+                      - disgusted
+                      - dodge
+                      - dreamy
+                      - edge
+                      - foupa
+                      - honkers
+                      - hug
+                      - kayla
+                      - key
+                      - kick
+                      - kill
+                      - killme
+                      - kiss
+                      - lewd
+                      - lick
+                      - love
+                      - miku
+                      - nobulli
+                      - nod
+                      - not-working
+                      - pat
+                      - poke
+                      - pout
+                      - punch
+                      - rawr
+                      - rekt
+                      - rin
+                      - rose
+                      - scare
+                      - shank
+                      - slap
+                      - spank
+                      - spoopy
+                      - squirtle
+                      - sunless
+                      - tickle
+                      - trump
+                      - vapenation
+                      - wave
+                      - whack
+                      - zorika
+                properties:
+                  count:
+                    type: number
+                    description: The amount of folders available.
+                  data:
+                    type: array
+                    uniqueItems: true
+                    description: An array of folder names.
+                    items:
+                      type: string
+                required:
+                  - count
+                  - data
+        '500':
+          description: Internal Server Error
+      operationId: listFolders
+      description: Lists all of the top-level folders within a given bucket. Useful for organi
+  '/:name':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: getRandomAsset
+      description: Retrieves a random asset from a given folder.
+    post:
+      summary: ''
+      operationId: uploadAsset
+      responses:
+        '200':
+          description: OK
+      description: Upload an asset to the given folder and assign it the next ID in the sequence.
+  '/:name/:id':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: getAsset
+      description: Retrieves an asset from the given folder with the given ID.
+    post:
+      summary: ''
+      operationId: uploadAssetById
+      responses:
+        '200':
+          description: OK
+      description: Upload a new asset to the given folder with the given ID.
+    put:
+      summary: ''
+      operationId: updateAsset
+      responses:
+        '200':
+          description: OK
+      description: Update an existing asset from the given folder with the given ID.
+    delete:
+      summary: ''
+      operationId: deleteAsset
+      responses:
+        '200':
+          description: OK
+      description: Delete the asset within the given folder with the given ID.
+components:
+  schemas: {}

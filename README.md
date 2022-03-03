@@ -1,12 +1,13 @@
 [![Build Status](https://dev.azure.com/4IS/Ansel/_apis/build/status/Ansel-API?branchName=main)](https://dev.azure.com/4IS/Ansel/_build/latest?definitionId=23&branchName=main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d14baf9dc560458d86493a3813f43599)](https://www.codacy.com/gh/4lch4/Ansel/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=4lch4/Ansel&amp;utm_campaign=Badge_Grade)
-[![dependencies Status](https://img.shields.io/david/HF-Solutions/Tron.svg?style=flat-square)](https://david-dm.org/4lch4/Ansel)
+![Depfu](https://img.shields.io/depfu/dependencies/github/4lch4/Ansel-API?style=flat-square)
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 [![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com)
 
 - [Ansel](#ansel)
   - [Name](#name)
+  - [Development - Road to v1](#development---road-to-v1)
   - [Usage - Server](#usage---server)
     - [Quickstart / `start.sh`](#quickstart--startsh)
     - [Setup](#setup)
@@ -22,11 +23,31 @@
 
 # Ansel
 
-Ansel is an API written in [TypeScript][3] using the [KoaJS framework][4], providing endpoints to retrieve images/data from S3 buckets. It was written to be used by my Discord bot, Tron, for commands that are image based such as `+wink` which would return a wink gif/image.
+Ansel is an API written in [TypeScript][3] using the [KoaJS framework][4], providing endpoints to retrieve images/data from S3/B2 buckets.
 
 ## Name
 
 Ansel is named after [Ansel][1] [Adams][0].
+
+## Development - Road to v1
+
+These items are what I consider the stepping stones to `v1`.
+
+- [ ] Full CRUD endpoints
+  - Basically I want to be able to upload new assets, update existing assets, delete assets, and of course retrieve/get assets.
+  - [ ] `/get`
+  - [ ] `/update`
+  - [ ] `/delete`
+  - [ ] `/upload`
+- [ ] OpenAPI Spec
+  - I want/need an OpenAPI specification file to make it easier for folks to begin using the API.
+- [ ] Documentation Site
+  - [Ansel-Docs Website][5]
+- [ ] Support for both [S3 compatible][6] APIs and [Backblaze B2][7] storage methods.
+  - [ ] S3
+  - [ ] B2
+- [ ] Benchmarks using [Artillery][8] or something similar.
+- [ ] This is more of a wish than a requirement but I'd like to have full monitoring of the various components within Dynatrace and/or Ackee (Theia).
 
 ## Usage - Server
 
@@ -187,3 +208,7 @@ OK
 [2]: https://httpie.io/
 [3]: https://www.typescriptlang.org/
 [4]: https://koajs.com/
+[5]: https://docs.ansel.cloud
+[6]: https://www.backblaze.com/b2/cloud-storage.html
+[7]: https://aws.amazon.com/s3/
+[8]: https://github.com/artilleryio/artillery

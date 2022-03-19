@@ -43,9 +43,6 @@ These items are what I consider the stepping stones to `v1`.
   - I want/need an OpenAPI specification file to make it easier for folks to begin using the API.
 - [ ] Documentation Site
   - [Ansel-Docs Website][5]
-- [ ] Support for both [S3 compatible][6] APIs and [Backblaze B2][7] storage methods.
-  - [ ] S3
-  - [ ] B2
 - [ ] Benchmarks using [Artillery][8] or something similar.
 - [ ] This is more of a wish than a requirement but I'd like to have full monitoring of the various components within Dynatrace and/or Ackee (Theia).
 

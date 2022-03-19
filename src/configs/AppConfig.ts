@@ -1,6 +1,13 @@
-import { IAppConfig } from '../interfaces'
+import { IAppConfig, StorageType } from '../interfaces'
+import { StorageConfig } from './StorageConfig'
 
 const NA = 'Unknown'
+
+const getStorageType = (input: string = 'S3'): StorageType => {
+  if (input.toLowerCase() === 's3') return StorageType.S3
+  else if (input.toLowerCase() === 'b2') return StorageType.B2
+  else return StorageType.S3
+}
 
 /**
  * The default values needed for the Application to function properly. All of
@@ -12,10 +19,7 @@ export const AppConfig: IAppConfig = {
   version: process.env.APP_VERSION || NA,
   port: parseInt(process.env.APP_PORT || '8080'),
   apiPrefix: process.env.API_PREFIX || NA,
-  bucketName: process.env.BUCKET_NAME || NA,
-  imgBaseUrl: process.env.IMG_BASE_URL || NA,
-  bucketEndpoint: process.env.BUCKET_ENDPOINT || NA,
-  bucketAccessKeyId: process.env.BUCKET_ACCESS_KEY_ID || NA,
-  bucketSecretAccessKey: process.env.BUCKET_SECRET_ACCESS_KEY || NA,
-  logRocketId: process.env.LOGROCKET_ID || NA
+  logRocketId: process.env.LOGROCKET_ID || NA,
+  storageConfig: StorageConfig,
+  storageType: getStorageType(process.env.STORAGE_TYPE)
 }

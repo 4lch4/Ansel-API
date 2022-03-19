@@ -106,7 +106,7 @@ paths:
           description: Internal Server Error
       operationId: listFolders
       description: Lists all of the top-level folders within a given bucket. Useful for organi
-  '/:name':
+  '/:folderName':
     get:
       summary: Your GET endpoint
       tags: []
@@ -120,7 +120,8 @@ paths:
         '200':
           description: OK
       description: Upload an asset to the given folder and assign it the next ID in the sequence.
-  '/:name/:id':
+    parameters: []
+  '/:folderName/:id':
     get:
       summary: Your GET endpoint
       tags: []
@@ -148,5 +149,6 @@ paths:
         '200':
           description: OK
       description: Delete the asset within the given folder with the given ID.
+    parameters: []
 components:
   schemas: {}

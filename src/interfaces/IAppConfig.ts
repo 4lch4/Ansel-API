@@ -1,3 +1,6 @@
+import { IStorageConfig } from './IStorageConfig'
+import { StorageType } from './StorageType'
+
 export interface IAppConfig {
   /** The display name of the application. */
   name: string
@@ -11,21 +14,12 @@ export interface IAppConfig {
   /** The prefix to all request endpoints. */
   apiPrefix: string
 
-  /** The name of the bucket where the images are stored. */
-  bucketName: string
-
-  /** The base URL for all images within Ansel. */
-  imgBaseUrl: string
-
-  /** The URL to the S3/Spaces endpoint where the images are stored. */
-  bucketEndpoint: string
-
-  /** The access key ID for the DigitalOcean Spaces instance. */
-  bucketAccessKeyId: string
-
-  /** The secret access key for the DigitalOcean Spaces instance. */
-  bucketSecretAccessKey: string
-
   /** The LogRocket ID for the application. */
   logRocketId: string
+
+  /** The configuration for the selected storage system. */
+  storageConfig: IStorageConfig
+
+  /** The type of storage system used, S3 or B2? Default is S3. */
+  storageType: StorageType
 }

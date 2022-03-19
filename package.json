@@ -18,6 +18,7 @@
     "@4lch4/logger": "^1.7.4",
     "@koa/router": "^10.0.0",
     "aws-sdk": "^2.905.0",
+    "backblaze-b2": "^1.7.0",
     "chalk": "^4.1.2",
     "chance": "1.1.7",
     "dayjs": "^1.10.7",
@@ -29,6 +30,7 @@
     "koa-logger": "^3.2.1"
   },
   "devDependencies": {
+    "@types/backblaze-b2": "^1.5.1",
     "@types/ioredis": "^4.28.1",
     "@types/koa": "^2.13.1",
     "@types/koa-bunyan-logger": "^2.1.3",

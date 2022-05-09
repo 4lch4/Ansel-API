@@ -35,10 +35,33 @@ These items are what I consider the stepping stones to `v1`.
 
 - [ ] Full CRUD endpoints
   - Basically I want to be able to upload new assets, update existing assets, delete assets, and of course retrieve/get assets.
-  - [ ] [`/get`][9]
-  - [ ] [`/list`][11]
+  - [x] [`/get`][9]
+    - [x] `/get/:folderName`
+      - [x] Returns a random asset from the folder w/ the same name as the `folderName` parameter.
+    - [x] `/get/:folderName/:assetId`
+      - [x] Return the asset from the folder w/ the same name as the `folderName` parameter and id matching the given `assetId` parameter.
+  - [x] [`/list`][11]
   - [ ] [`/delete`][12]
   - [ ] [`/upload`][13]
+- [ ] All endpoints should return the following basic status codes as expected:
+  - [x] Successful
+    - [x] 200 - OK
+    - [x] 201 - Created
+    - [x] 202 - Accepted
+    - [x] 203 - Non-Authoritative Information
+    - [x] 204 - No Content
+    - [x] 205 - Reset Content
+    - [x] 206 - Partial Content
+  - [x] Client Error
+    - [x] 400 - Bad Request
+    - [x] 401 - Unauthorized
+    - [x] 402 - Payment Required
+    - [x] 403 - Forbidden
+    - [x] 404 - Not Found
+    - [x] 405 - Method Not Allowed
+      - [x] This one is handled by Koa under the hood for us.
+  - [x] Server Error
+    - [x] 500 - A generic server error, doesn't fit any of the following codes.
 - [ ] [OpenAPI Spec][14]
   - I want/need an OpenAPI specification file to make it easier for folks to begin using the API.
 - [ ] [Documentation Site][10]
@@ -155,7 +178,7 @@ Connection: keep-alive
 Content-Length: 42
 ...
 
-https://ansel.4lch4.tech/alcha/alcha-6.png
+https://i.ansel.rest/alcha/alcha-6.png
 ```
 
 #### Index Retrieval
@@ -170,7 +193,7 @@ Connection: keep-alive
 Content-Length: 42
 ...
 
-https://ansel.4lch4.tech/alcha/alcha-2.gif
+https://i.ansel.rest/alcha/alcha-2.gif
 ```
 
 ### Healthcheck Endpoints

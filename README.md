@@ -35,13 +35,13 @@ These items are what I consider the stepping stones to `v1`.
 
 - [ ] Full CRUD endpoints
   - Basically I want to be able to upload new assets, update existing assets, delete assets, and of course retrieve/get assets.
-  - [ ] `/get`
-  - [ ] `/update`
-  - [ ] `/delete`
-  - [ ] `/upload`
-- [ ] OpenAPI Spec
+  - [ ] [`/get`][9]
+  - [ ] [`/list`][11]
+  - [ ] [`/delete`][12]
+  - [ ] [`/upload`][13]
+- [ ] [OpenAPI Spec][14]
   - I want/need an OpenAPI specification file to make it easier for folks to begin using the API.
-- [ ] Documentation Site
+- [ ] [Documentation Site][10]
   - [Ansel-Docs Website][5]
 - [ ] Support for both [S3 compatible][6] APIs and [Backblaze B2][7] storage methods.
   - [ ] S3
@@ -212,3 +212,10 @@ OK
 [6]: https://www.backblaze.com/b2/cloud-storage.html
 [7]: https://aws.amazon.com/s3/
 [8]: https://github.com/artilleryio/artillery
+[9]: https://github.com/4lch4/Ansel-API/issues/267
+[10]: https://github.com/4lch4/Ansel-API/issues/268
+[11]: https://github.com/4lch4/Ansel-API/issues/269
+[12]: https://github.com/4lch4/Ansel-API/issues/270
+[13]: https://github.com/4lch4/Ansel-API/issues/271
+[14]: https://github.com/4lch4/Ansel-API/issues/272
+[15]: https://github.com/4lch4/Ansel-API/issues/273

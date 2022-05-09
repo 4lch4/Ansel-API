@@ -10,7 +10,7 @@
     "docker:build": "docker build -t 4lch4/ansel:latest .",
     "docker:stop": "docker stop ansel && docker rm ansel",
     "docker:start": "./start.sh",
-    "docker:refresh": "yarn docker:build && yarn docker:stop && yarn docker:start"
+    "docker:refresh": "pnpm docker:build && pnpm docker:stop && pnpm docker:start"
   },
   "dependencies": {
     "@4lch4/koa-oto": "^1.3.1",

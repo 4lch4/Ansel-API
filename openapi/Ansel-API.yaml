@@ -31,7 +31,7 @@ servers:
     description: Ansel Prod
 
 paths:
-  /delete/:folderName:
+  /delete/{folderName}:
     delete:
       description: Delete the folder with the given `folderName` and all the assets within.
       operationId: deleteAssets
@@ -39,7 +39,6 @@ paths:
       tags: [Assets]
       parameters:
         - $ref: '#/components/parameters/FolderName'
-        - $ref: '#/components/parameters/AssetId'
       responses:
         '200':
           $ref: '#/components/responses/EmptyOKResponse'
@@ -48,7 +47,7 @@ paths:
         '404':
           description: There was no folder with the given `folderName`.
 
-  /delete/:folderName/:assetId:
+  /delete/{folderName}/{assetId}:
     delete:
       description: Delete the asset within the given folder with the given ID.
       operationId: deleteAsset
@@ -65,7 +64,7 @@ paths:
         '404':
           description: There was no asset in the given folder with the given `assetId`.
 
-  /get/:folderName:
+  /get/{folderName}:
     get:
       description: Gets a random asset from the folder with the name given by the parameter value.
       operationId: getRandomAsset
@@ -81,7 +80,7 @@ paths:
         '404':
           description: There was no folder with the given folder name.
 
-  /get/:folderName/:assetId:
+  /get/{folderName}/{assetId}:
     get:
       description: Retrieves an asset from the folder with the given name, with the given ID.
       operationId: getAsset
@@ -112,7 +111,7 @@ paths:
         '500':
           description: Internal Server Error
 
-  /list/:folderName:
+  /list/{folderName}:
     get:
       description: List all of the folders within a given folder.
       operationId: listFoldersWithinFolder
@@ -128,7 +127,7 @@ paths:
         '404':
           description: There was no folder with the given `folderName`.
 
-  /upload/:folderName:
+  /upload/{folderName}:
     post:
       description: Upload an asset to the given folder and assign it the next ID in the sequence.
       operationId: uploadAsset
@@ -151,7 +150,7 @@ paths:
         '404':
           description: There was no folder with the given `folderName`.
 
-  /upload/:folderName/:assetId:
+  /upload/{folderName}/{assetId}:
     post:
       description: Upload a new asset to the given folder with the given ID.
       operationId: uploadAssetById
@@ -243,7 +242,7 @@ components:
   parameters:
     AssetId:
       name: assetId
-      in: query
+      in: path
       required: true
       description: The ID of the specific asset you wish to interact with.
       schema:
@@ -251,7 +250,7 @@ components:
 
     FolderName:
       name: folderName
-      in: query
+      in: path
       required: true
       description: The name of the folder containing the asset/blob.
       schema:

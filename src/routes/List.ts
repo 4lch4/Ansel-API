@@ -8,7 +8,10 @@ const retriever = new Retriever()
 export class ListEndpoint extends BaseEndpoint {
   async getList(ctx: RouterContext) {
     try {
-      const res = await retriever.getDirectoryList()
+      const { folderName } = ctx.params
+      const res = folderName
+        ? await retriever.getDirectoryContents(folderName)
+        : await retriever.getDirectoryList()
 
       Successful.ok(ctx, { body: res })
       logger.success(`${ctx.method} ⇥ ${ctx.path} ⇥ (${ctx.status})`)
@@ -21,6 +24,7 @@ export class ListEndpoint extends BaseEndpoint {
 
   build() {
     this.router.get('/list', async ctx => this.getList(ctx))
+    this.router.get('/list/:folderName', async ctx => this.getList(ctx))
 
     return this.router
   }

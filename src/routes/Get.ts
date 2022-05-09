@@ -8,28 +8,27 @@ const retriever = new Retriever()
 export class GetEndpoint extends BaseEndpoint {
   async getMethod(ctx: RouterContext) {
     try {
-      const dirName = ctx.params.name
-      const { count, data } = await retriever.getDirectoryContents(dirName)
+      const { folderName, assetId } = ctx.params
+      const { count, data } = await retriever.getDirectoryContents(folderName)
 
       if (count && Array.isArray(data) && typeof data[0] !== 'undefined') {
-        const id = ctx.params.id
-          ? parseInt(ctx.params.id)
-          : getRandomNumber(0, count - 1)
-
-        const imageName = data[id]
+        const imageName =
+          data[assetId ? parseInt(assetId) : getRandomNumber(0, count - 1)]
 
         if (imageName) {
-          Successful.ok(ctx, { body: getImageUrl(dirName, imageName) })
+          Successful.ok(ctx, { body: getImageUrl(folderName, imageName) })
           logger.success(`${ctx.method} ⇥ ${ctx.path} ⇥ (${ctx.status})`)
         } else {
           ClientErrors.notFound(ctx, {
-            body: `No image found for ${dirName} with id ${id}`
+            body: `No image found for ${folderName} with id ${assetId}`
           })
           logger.error(`${ctx.method} ⇥ ${ctx.path} ⇥ (404)`)
         }
       } else {
-        ClientErrors.notFound(ctx, { body: `No images found for ${dirName}` })
-        logger.error(`${ctx.method} ⇥ ${ctx.path} ⇥ ${dirName} ⇥ (404)`)
+        ClientErrors.notFound(ctx, {
+          body: `No images found for ${folderName}`
+        })
+        logger.error(`${ctx.method} ⇥ ${ctx.path} ⇥ ${folderName} ⇥ (404)`)
       }
     } catch (err) {
       ServerErrors.internalServerError(ctx, { body: err })
@@ -39,8 +38,10 @@ export class GetEndpoint extends BaseEndpoint {
   }
 
   build() {
-    this.router.get('/get/:name', async ctx => this.getMethod(ctx))
-    this.router.get('/get/:name/:id', async ctx => this.getMethod(ctx))
+    this.router.get('/get/:folderName', async ctx => this.getMethod(ctx))
+    this.router.get('/get/:folderName/:assetId', async ctx =>
+      this.getMethod(ctx)
+    )
 
     return this.router
   }

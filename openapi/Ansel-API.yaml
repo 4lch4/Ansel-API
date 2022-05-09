@@ -31,31 +31,20 @@ servers:
     description: Ansel Prod
 
 paths:
-  /list:
-    get:
-      description: Lists all of the top-level folders within a given bucket. Useful for organizing.
-      operationId: listFolders
-      summary: List Folders w/in a Bucket.
-      tags: [Assets]
-      responses:
-        '200':
-          $ref: '#/components/responses/FolderListOKResponse'
-        '500':
-          description: Internal Server Error
-
-  /list/:name:
-    get:
-      description: List all of the folders within a given folder.
-      operationId: listFoldersWithinFolder
-      summary: List folders w/in a folder.
+  /delete/:folderName/:assetId:
+    delete:
+      description: Delete the asset within the given folder with the given ID.
+      operationId: deleteAsset
+      summary: Delete a given asset from a given folder.
       tags: [Assets]
       parameters:
         - $ref: '#/components/parameters/FolderName'
+        - $ref: '#/components/parameters/AssetId'
       responses:
         '200':
-          $ref: '#/components/responses/FolderListOKResponse'
+          $ref: '#/components/responses/EmptyOKResponse'
 
-  /:name:
+  /get/:folderName:
     get:
       description: Gets a random asset from the folder with the name given by the parameter value.
       operationId: getRandomAsset
@@ -67,18 +56,7 @@ paths:
         '200':
           $ref: '#/components/responses/AssetOKResponse'
 
-    post:
-      description: Upload an asset to the given folder and assign it the next ID in the sequence.
-      operationId: uploadAsset
-      summary: Upload a new asset to a given folder.
-      tags: [Assets]
-      parameters:
-        - $ref: '#/components/parameters/FolderName'
-      responses:
-        '200':
-          $ref: '#/components/responses/EmptyOKResponse'
-
-  /:name/:id:
+  /get/:folderName/:assetId:
     get:
       description: Retrieves an asset from the folder with the given name, with the given ID.
       operationId: getAsset
@@ -91,6 +69,51 @@ paths:
         '200':
           $ref: '#/components/responses/AssetOKResponse'
 
+  /list:
+    get:
+      description: Lists all of the top-level folders within a given bucket. Useful for organizing.
+      operationId: listFolders
+      summary: List Folders w/in a Bucket.
+      tags: [Assets]
+      responses:
+        '200':
+          $ref: '#/components/responses/FolderListOKResponse'
+        '500':
+          description: Internal Server Error
+
+  /list/:folderName:
+    get:
+      description: List all of the folders within a given folder.
+      operationId: listFoldersWithinFolder
+      summary: List folders w/in a folder.
+      tags: [Assets]
+      parameters:
+        - $ref: '#/components/parameters/FolderName'
+      responses:
+        '200':
+          $ref: '#/components/responses/FolderListOKResponse'
+
+  /upload/:folderName:
+    post:
+      description: Upload an asset to the given folder and assign it the next ID in the sequence.
+      operationId: uploadAsset
+      summary: Upload a new asset to a given folder.
+      tags: [Assets]
+      parameters:
+        - $ref: '#/components/parameters/FolderName'
+      responses:
+        # Returns a 201 (Created) if the asset was successfully uploaded, with the message body being a URL to the new asset.
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The URL to the newly uploaded asset.
+                example: https://i.ansel.rest/confused/confused-1.gif
+          # $ref: '#/components/responses/EmptyOKResponse'
+
+  /upload/:folderName/:assetId:
     post:
       description: Upload a new asset to the given folder with the given ID.
       operationId: uploadAssetById
@@ -100,8 +123,15 @@ paths:
         - $ref: '#/components/parameters/FolderName'
         - $ref: '#/components/parameters/AssetId'
       responses:
-        '200':
-          $ref: '#/components/responses/EmptyOKResponse'
+        # Returns a 201 (Created) if the asset was successfully uploaded, with the message body being a URL to the new asset.
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The URL to the newly uploaded asset.
+                example: https://i.ansel.rest/confused/confused-1.gif
 
     put:
       description: Update an existing asset from the given folder with the given ID.
@@ -112,20 +142,15 @@ paths:
         - $ref: '#/components/parameters/FolderName'
         - $ref: '#/components/parameters/AssetId'
       responses:
-        '200':
-          $ref: '#/components/responses/EmptyOKResponse'
-
-    delete:
-      description: Delete the asset within the given folder with the given ID.
-      operationId: deleteAsset
-      summary: Delete a given asset from a given folder.
-      tags: [Assets]
-      parameters:
-        - $ref: '#/components/parameters/FolderName'
-        - $ref: '#/components/parameters/AssetId'
-      responses:
-        '200':
-          $ref: '#/components/responses/EmptyOKResponse'
+        # Returns a 201 (Created) if the asset was successfully uploaded, with the message body being a URL to the new asset.
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The URL to the newly uploaded asset.
+                example: https://i.ansel.rest/confused/confused-1.gif
 
 components:
   responses:
@@ -154,7 +179,7 @@ components:
 
   parameters:
     AssetId:
-      name: id
+      name: assetId
       in: query
       required: true
       description: The ID of the specific asset you wish to interact with.
@@ -162,7 +187,7 @@ components:
         type: string
 
     FolderName:
-      name: name
+      name: folderName
       in: query
       required: true
       description: The name of the folder containing the asset/blob.
@@ -184,7 +209,7 @@ components:
     AssetUrl:
       type: string
       description: The URL that is associated with a given asset/blob.
-      example: https://ansel.4lch4.tech/confused/confused-1.gif
+      example: https://i.ansel.rest/confused/confused-1.gif
 
     FolderList:
       type: object

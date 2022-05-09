@@ -14,7 +14,7 @@ info:
     # identifier: GPL-3.0-only # For OpenAPI 3.1.0
 
 externalDocs:
-  url: https://docs.ansel.cloud
+  url: https://docs.ansel.rest
 
 tags:
   - name: Assets
@@ -25,9 +25,9 @@ tags:
 servers:
   - url: http://localhost:8080
     description: Local Test
-  - url: https://test.ansel.cloud
+  - url: https://test.ansel.rest
     description: Ansel Test
-  - url: https://ansel.cloud
+  - url: https://ansel.rest
     description: Ansel Prod
 
 paths:

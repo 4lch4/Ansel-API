@@ -4,7 +4,7 @@ metadata:
   name: letsencrypt
 spec:
   acme:
-    server: 'https://ansel.4lch4.cloud'
+    server: 'https://ansel.4lch4.rest'
     email: letsencrypt@4lch4.email
     privateKeySecretRef:
       name: letsencrypt

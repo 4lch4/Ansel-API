@@ -1,5 +1,5 @@
 config:
-  target: 'https://ansel.4lch4.cloud/api/v1'
+  target: 'https://ansel.4lch4.rest/api/v1'
   tls:
     rejectUnauthorized: false
   phases:
@@ -23,9 +23,9 @@ config:
 
   environments:
     production:
-      target: 'https://ansel.4lch4.cloud/api/v1'
+      target: 'https://ansel.4lch4.rest/api/v1'
     testing:
-      target: 'https://ansel-test.4lch4.cloud/api/v1'
+      target: 'https://ansel-test.4lch4.rest/api/v1'
 
 scenarios:
   - name: 'Get Images'

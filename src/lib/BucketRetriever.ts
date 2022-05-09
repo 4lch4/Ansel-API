@@ -1,3 +1,4 @@
+import { logger } from '@4lch4/logger'
 import { Endpoint, S3 } from 'aws-sdk'
 import { AppConfig } from '../configs'
 
@@ -55,6 +56,28 @@ export class Retriever {
           }
         }
       )
+    })
+  }
+
+  async deleteAsset(folderName: string, assetId: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.getDirectoryContents(folderName)
+          .then(names => {
+            for (const name in names) {
+              if (name.startsWith(`${folderName}-${assetId}`)) { 
+                // Found the correct asset!
+                logger.debug(`name = ${name}`)
+              }
+            }
+
+            logger.debug(`End of loop...`)
+            resolve()
+          })
+          .catch(err => reject(err))
+      } catch (err) {
+        reject(err)
+      }
     })
   }
 }

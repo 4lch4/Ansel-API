@@ -13,7 +13,7 @@ export function getRandomNumber(min: number, max: number) {
  * For example, if given `wave` as the directory, and `wave-0.gif` as the
  * filename, the resulting URL will be:
  *
- * https://ansel.4lch4.tech/wave/wave-0.gif
+ * https://i.ansel.rest/wave/wave-0.gif
  *
  * @param directory The Directory containing the file.
  * @param filename The name of the file/img to return.

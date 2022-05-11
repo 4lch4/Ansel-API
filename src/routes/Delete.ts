@@ -12,23 +12,32 @@ export class DeleteEndpoint extends BaseEndpoint {
 
       if (folderName) {
         if (assetId) {
-          const res = await retriever.deleteAsset(folderName, assetId)
-          logger.debug(`res...`)
-          logger.debug(JSON.stringify(res, null, 2))
+          await retriever.deleteAsset(folderName, assetId)
+
+          Successful.ok(ctx, { body: `${folderName}/${assetId} deleted` })
+          logger.success(`${ctx.method} ⇥ ${ctx.path} ⇥ (${ctx.status})`)
         } else {
-          logger.debug(`No assetId provided...`)
+          const res = await retriever.deleteFolder(folderName)
+
+          console.log(res)
+
+          Successful.ok(ctx, { body: `Folder ${folderName} deleted` })
+          logger.success(`${ctx.method} ⇥ ${ctx.path} ⇥ (${ctx.status})`)
         }
       } else throw new Error('No folderName parameter was provided.')
-
-      Successful.ok(ctx, { body: 'Successfully deleted asset.' })
     } catch (error) {
       throw error
     }
   }
 
   build() {
-    this.router.delete('/delete/:folderName')
-    this.router.delete('/delete/:folderName/:assetId')
+    this.router.delete('/delete/:folderName', async ctx =>
+      this.deleteMethod(ctx)
+    )
+
+    this.router.delete('/delete/:folderName/:assetId', async ctx =>
+      this.deleteMethod(ctx)
+    )
 
     return this.router
   }

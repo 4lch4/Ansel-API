@@ -59,20 +59,90 @@ export class Retriever {
     })
   }
 
-  async deleteAsset(folderName: string, assetId: string): Promise<void> {
+  private getAssetName(
+    folderName: string,
+    assetId: string
+  ): Promise<string | undefined> {
     return new Promise((resolve, reject) => {
       try {
         this.getDirectoryContents(folderName)
-          .then(names => {
-            for (const name in names) {
-              if (name.startsWith(`${folderName}-${assetId}`)) { 
+          .then(res => {
+            for (const index in res.data) {
+              // @ts-ignore
+              const name = res.data[index]
+              if (name.startsWith(`${folderName}-${assetId}`)) {
                 // Found the correct asset!
-                logger.debug(`name = ${name}`)
+                resolve(name)
               }
             }
 
-            logger.debug(`End of loop...`)
-            resolve()
+            resolve(undefined)
+          })
+          .catch(err => reject(err))
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  async deleteFolder(folderName: string): Promise<any> {
+    logger.debug(`Deleting ${folderName} folder...`)
+    const folderContents = await this.getDirectoryContents(folderName)
+    const folderObjects: S3.ObjectIdentifierList = []
+
+    if (folderContents.data) {
+      for (const item of folderContents.data) {
+        folderObjects.push({ Key: `${folderName}/${item}` })
+      }
+    } else return `${folderName} is empty`
+
+    return new Promise((resolve, reject) => {
+      try {
+        this.client.deleteObjects(
+          {
+            Bucket: AppConfig.bucketName,
+            Delete: {
+              Objects: folderObjects
+            }
+          },
+          (err, _data) => {
+            if (err) reject(err)
+            else {
+              this.client.deleteObject(
+                { Bucket: AppConfig.bucketName, Key: folderName },
+                (err, data) => {
+                  if (err) reject(err)
+                  else resolve(data)
+                }
+              )
+            }
+          }
+        )
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  async deleteAsset(folderName: string, assetId: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.getAssetName(folderName, assetId)
+          .then(assetName => {
+            if (assetName) {
+              logger.debug(`Deleting ${assetName} asset...`)
+
+              this.client.deleteObject(
+                {
+                  Bucket: AppConfig.bucketName,
+                  Key: `${folderName}/${assetName}`
+                },
+                (err, data) => {
+                  if (err) reject(err)
+                  else resolve(data)
+                }
+              )
+            } else logger.warn(`Asset ${assetId} not found in ${folderName}`)
           })
           .catch(err => reject(err))
       } catch (err) {

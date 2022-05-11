@@ -18,3 +18,4 @@ pnpm-lock.yaml
 settings.json
 settings.sample.json
 start.sh
+tests

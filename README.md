@@ -35,10 +35,10 @@ These items are what I consider the stepping stones to `v1`.
 
 - [ ] Full CRUD endpoints
   - Basically I want to be able to upload new assets, update existing assets, delete assets, and of course retrieve/get assets.
-  - [x] [`/get`][9]
-    - [x] `/get/:folderName`
+  - [x] [`/`][9]
+    - [x] `/:folderName`
       - [x] Returns a random asset from the folder w/ the same name as the `folderName` parameter.
-    - [x] `/get/:folderName/:assetId`
+    - [x] `/:folderName/:assetId`
       - [x] Return the asset from the folder w/ the same name as the `folderName` parameter and id matching the given `assetId` parameter.
   - [x] [`/list`][11]
   - [ ] [`/delete`][12]
@@ -75,6 +75,27 @@ These items are what I consider the stepping stones to `v1`.
 ## Usage - Server
 
 In order to use the Ansel API, you must have a few things already good to go. For example, the S3 bucket which will contain your images should already be setup and an API key to access it generated.
+
+## Environment Variables (`.env`)
+
+First up, we need to set up our environment variables. This project makes use of `.env` files to simplify the process of setting it up. This means you only need create a file called `.env` in the root of the project and fill it with the following variables:
+
+### Required
+
+| Name            | Description                                               | Required | Default |
+| --------------- | --------------------------------------------------------- | -------- | ------- |
+| `SPACES_KEY`    | The key to access the DigitalOcean Spaces bucket.         | Yes      | N/A     |
+| `SPACES_SECRET` | The secret to access the DigitalOcean Spaces bucket.      | Yes      | N/A     |
+| `CDN_URL`       | The base URL of the CDN where the images can be accessed. | Yes      | N/A     |
+
+### Optional
+
+| Name          | Description                         | Required | Default          |
+| ------------- | ----------------------------------- | -------- | ---------------- |
+| `API_PREFIX`  | The prefix of all endpoints.        | No       | `/api/v1`        |
+| `API_VERSION` | The version of the API.             | No       | `v1`             |
+| `API_PORT`    | The port the server will listen on. | No       | `8080`           |
+| `SERVER_URL`  | The local URL of the server.        | No       | `localhost:8080` |
 
 ### Quickstart / `start.sh`
 
